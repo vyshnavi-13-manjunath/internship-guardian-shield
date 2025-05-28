@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Don't render navbar if showNavbar is false
+  if (!showNavbar) return null;
 
   const navItems = [
     { name: "Home", path: "/" },
