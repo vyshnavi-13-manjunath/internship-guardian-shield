@@ -7,8 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, ArrowLeft, Search, Shield, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
+import PageHeader from "@/components/PageHeader";
 import { toast } from "sonner";
 
 const ScanInternship = () => {
@@ -16,6 +16,7 @@ const ScanInternship = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     internshipText: "",
+    companyName: "",
     recruiterEmail: "",
     recruiterPhone: "",
     recruiterName: "",
@@ -50,11 +51,10 @@ const ScanInternship = () => {
   };
 
   const performLinkedInVerification = async () => {
-    // Simulated LinkedIn verification
     toast.info("Verifying LinkedIn profile...");
     
     setTimeout(() => {
-      const verified = Math.random() > 0.3; // 70% chance of verification
+      const verified = Math.random() > 0.3;
       if (verified) {
         toast.success("LinkedIn profile verified successfully");
       } else {
@@ -64,11 +64,9 @@ const ScanInternship = () => {
   };
 
   const performScamAnalysis = () => {
-    // Simulated AI analysis
     const redFlags = [];
     const greenFlags = [];
     
-    // Analyze AI questions
     if (aiQuestions[0].answer.toLowerCase().includes('yes')) {
       redFlags.push("Money requested (Major red flag)");
     }
@@ -85,14 +83,12 @@ const ScanInternship = () => {
       redFlags.push("Pressure tactics used");
     }
 
-    // Analyze email domain
     if (formData.recruiterEmail.includes('@gmail.com') || formData.recruiterEmail.includes('@yahoo.com')) {
       redFlags.push("Personal email domain used");
     } else if (formData.recruiterEmail.includes('.com') && !formData.recruiterEmail.includes('gmail')) {
       greenFlags.push("Professional email domain");
     }
 
-    // Calculate risk score
     const riskScore = Math.min(100, (redFlags.length * 20) + Math.floor(Math.random() * 10));
     
     let riskLevel = "Low";
@@ -126,8 +122,8 @@ const ScanInternship = () => {
       }
       setStep(2);
     } else if (step === 2) {
-      if (!formData.recruiterEmail.trim()) {
-        toast.error("Please provide recruiter email");
+      if (!formData.companyName.trim() || !formData.recruiterEmail.trim()) {
+        toast.error("Please provide company name and recruiter email");
         return;
       }
       setStep(3);
@@ -157,6 +153,7 @@ const ScanInternship = () => {
     setStep(1);
     setFormData({
       internshipText: "",
+      companyName: "",
       recruiterEmail: "",
       recruiterPhone: "",
       recruiterName: "",
@@ -167,25 +164,14 @@ const ScanInternship = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <Navbar />
-      
+    <Layout>
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center mb-8">
-          <Button 
-            variant="ghost" 
-            onClick={handleBack}
-            className="mr-4"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Internship Scam Scanner</h1>
-            <p className="text-gray-600 mt-2">Let our AI analyze your internship offer for potential scams</p>
-          </div>
-        </div>
+        <PageHeader 
+          title="Internship Scam Scanner"
+          subtitle="Let our AI analyze your internship offer for potential scams"
+          showBackButton={true}
+          onBack={handleBack}
+        />
 
         {/* Progress Bar */}
         <div className="mb-8">
@@ -248,25 +234,35 @@ const ScanInternship = () => {
               </div>
 
               <Button onClick={handleNext} className="w-full bg-blue-600 hover:bg-blue-700">
-                Continue to Recruiter Details
+                Continue to Company Details
               </Button>
             </CardContent>
           </Card>
         )}
 
-        {/* Step 2: Recruiter Information */}
+        {/* Step 2: Company & Recruiter Information */}
         {step === 2 && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Shield className="h-5 w-5 mr-2 text-blue-600" />
-                Step 2: Recruiter Information
+                Step 2: Company & Recruiter Information
               </CardTitle>
               <CardDescription>
-                Provide details about the person/company who contacted you
+                Provide details about the company and person who contacted you
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              <div>
+                <Label htmlFor="company-name">Company Name *</Label>
+                <Input
+                  id="company-name"
+                  placeholder="e.g., Google, Microsoft, TCS"
+                  value={formData.companyName}
+                  onChange={(e) => handleInputChange('companyName', e.target.value)}
+                />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="recruiter-name">Recruiter Name</Label>
@@ -291,7 +287,7 @@ const ScanInternship = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="recruiter-phone">Phone Number</Label>
+                  <Label htmlFor="recruiter-phone">Phone Number (Optional)</Label>
                   <Input
                     id="recruiter-phone"
                     placeholder="+1 (555) 123-4567"
@@ -474,9 +470,7 @@ const ScanInternship = () => {
           </Card>
         )}
       </div>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

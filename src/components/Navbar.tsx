@@ -9,16 +9,25 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Don't render navbar if showNavbar is false
   if (!showNavbar) return null;
 
-  const navItems = [
+  const isHomePage = location.pathname === "/";
+  
+  const homeNavItems = [
     { name: "Home", path: "/" },
     { name: "Scan Internship", path: "/scan" },
     { name: "Community", path: "/community" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "About", path: "/about" }
   ];
+
+  const otherPagesNavItems = [
+    { name: "Scan Internship", path: "/scan" },
+    { name: "Community", path: "/community" },
+    { name: "Dashboard", path: "/dashboard" }
+  ];
+
+  const navItems = isHomePage ? homeNavItems : otherPagesNavItems;
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -36,7 +45,7 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
               alt="Safe Start Logo" 
               className="h-10 w-auto"
             />
-            <span className="text-2xl font-bold text-blue-600">Safe Start</span>
+            <span className="text-2xl font-bold text-blue-600 whitespace-nowrap">Safe Start</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -45,7 +54,7 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
               <button
                 key={item.name}
                 onClick={() => navigate(item.path)}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
                   isActive(item.path)
                     ? "text-blue-600 bg-blue-50"
                     : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -56,22 +65,24 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
             ))}
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/login')}
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
-            >
-              Login
-            </Button>
-            <Button 
-              onClick={() => navigate('/register')}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              Sign Up
-            </Button>
-          </div>
+          {/* Desktop Auth Buttons - Only show on home page */}
+          {isHomePage && (
+            <div className="hidden md:flex items-center space-x-4">
+              <Button 
+                variant="outline" 
+                onClick={() => navigate('/login')}
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
+                Login
+              </Button>
+              <Button 
+                onClick={() => navigate('/register')}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -105,27 +116,29 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
                   {item.name}
                 </button>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t">
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    navigate('/login');
-                    setIsMenuOpen(false);
-                  }}
-                  className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                >
-                  Login
-                </Button>
-                <Button 
-                  onClick={() => {
-                    navigate('/register');
-                    setIsMenuOpen(false);
-                  }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  Sign Up
-                </Button>
-              </div>
+              {isHomePage && (
+                <div className="flex flex-col space-y-2 pt-4 border-t">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      navigate('/login');
+                      setIsMenuOpen(false);
+                    }}
+                    className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      navigate('/register');
+                      setIsMenuOpen(false);
+                    }}
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}
