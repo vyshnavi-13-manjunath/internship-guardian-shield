@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -84,24 +83,63 @@ const Dashboard = () => {
     { icon: "👑", title: "Elite Guardian", description: "Protected 500+ users from scams", earned: false }
   ];
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
+  const handleBackToOverview = () => {
+    setActiveTab('overview');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <Navbar />
+      {/* Show navbar only on overview tab */}
+      {activeTab === 'overview' && <Navbar />}
       
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header */}
+        {/* Header - modified for sub-sections */}
         <div className="flex items-center mb-8">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate('/')}
-            className="mr-4"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Dashboard</h1>
-            <p className="text-gray-600 mt-2">Track your progress and manage your account</p>
+          {activeTab !== 'overview' ? (
+            <Button 
+              variant="ghost" 
+              onClick={handleBackToOverview}
+              className="mr-4"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Dashboard
+            </Button>
+          ) : (
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="mr-4"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
+          )}
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/lovable-uploads/092a01fd-84b9-4028-ad76-e236c1efa376.png" 
+              alt="Safe Start Logo" 
+              className="h-8 w-auto"
+            />
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {activeTab === 'overview' && 'My Dashboard'}
+                {activeTab === 'scans' && 'My Scans'}
+                {activeTab === 'reports' && 'My Reports'}
+                {activeTab === 'achievements' && 'Achievements'}
+                {activeTab === 'settings' && 'Settings'}
+              </h1>
+              <p className="text-gray-600 mt-2">
+                {activeTab === 'overview' && 'Track your progress and manage your account'}
+                {activeTab === 'scans' && 'View your internship scan history'}
+                {activeTab === 'reports' && 'Manage your community reports'}
+                {activeTab === 'achievements' && 'Your badges and milestones'}
+                {activeTab === 'settings' && 'Account preferences and security'}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -109,7 +147,7 @@ const Dashboard = () => {
         <div className="flex space-x-4 mb-8 border-b">
           <Button
             variant={activeTab === 'overview' ? 'default' : 'ghost'}
-            onClick={() => setActiveTab('overview')}
+            onClick={() => handleTabChange('overview')}
             className="border-b-2 border-transparent data-[state=active]:border-blue-600"
           >
             <User className="h-4 w-4 mr-2" />
@@ -117,7 +155,7 @@ const Dashboard = () => {
           </Button>
           <Button
             variant={activeTab === 'scans' ? 'default' : 'ghost'}
-            onClick={() => setActiveTab('scans')}
+            onClick={() => handleTabChange('scans')}
             className="border-b-2 border-transparent data-[state=active]:border-blue-600"
           >
             <Shield className="h-4 w-4 mr-2" />
@@ -125,7 +163,7 @@ const Dashboard = () => {
           </Button>
           <Button
             variant={activeTab === 'reports' ? 'default' : 'ghost'}
-            onClick={() => setActiveTab('reports')}
+            onClick={() => handleTabChange('reports')}
             className="border-b-2 border-transparent data-[state=active]:border-blue-600"
           >
             <TrendingUp className="h-4 w-4 mr-2" />
@@ -133,7 +171,7 @@ const Dashboard = () => {
           </Button>
           <Button
             variant={activeTab === 'achievements' ? 'default' : 'ghost'}
-            onClick={() => setActiveTab('achievements')}
+            onClick={() => handleTabChange('achievements')}
             className="border-b-2 border-transparent data-[state=active]:border-blue-600"
           >
             <Award className="h-4 w-4 mr-2" />
@@ -141,7 +179,7 @@ const Dashboard = () => {
           </Button>
           <Button
             variant={activeTab === 'settings' ? 'default' : 'ghost'}
-            onClick={() => setActiveTab('settings')}
+            onClick={() => handleTabChange('settings')}
             className="border-b-2 border-transparent data-[state=active]:border-blue-600"
           >
             <Settings className="h-4 w-4 mr-2" />
@@ -422,7 +460,8 @@ const Dashboard = () => {
         )}
       </div>
 
-      <Footer />
+      {/* Show footer only on overview tab */}
+      {activeTab === 'overview' && <Footer />}
     </div>
   );
 };
