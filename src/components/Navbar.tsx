@@ -37,7 +37,7 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div 
-            className="flex items-center space-x-3 cursor-pointer"
+            className="flex items-center space-x-1 cursor-pointer"
             onClick={() => navigate('/')}
           >
             <img 
