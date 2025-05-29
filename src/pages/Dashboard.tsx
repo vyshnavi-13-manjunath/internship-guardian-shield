@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -136,8 +137,8 @@ const Dashboard = () => {
               onClick={() => handleTabChange(key)}
               className={`flex-1 sm:flex-none ${
                 activeTab === key 
-                  ? 'bg-white shadow-sm' 
-                  : 'hover:bg-white/50'
+                  ? 'bg-blue-600 text-white shadow-sm hover:bg-blue-700' 
+                  : 'text-gray-700 hover:bg-white/50 hover:text-gray-900'
               }`}
             >
               <Icon className="h-4 w-4 mr-2" />
