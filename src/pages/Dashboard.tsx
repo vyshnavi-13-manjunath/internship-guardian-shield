@@ -377,9 +377,6 @@ const Dashboard = () => {
                       <Button variant="outline" className="w-full justify-start hover:bg-blue-50">
                         Change Password
                       </Button>
-                      <Button variant="outline" className="w-full justify-start hover:bg-blue-50">
-                        Verify LinkedIn Account
-                      </Button>
                     </div>
                   </div>
                   <div>

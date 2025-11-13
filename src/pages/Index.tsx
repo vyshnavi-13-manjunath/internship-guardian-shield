@@ -20,7 +20,7 @@ const Index = () => {
     {
       icon: Shield,
       title: "Cross-Platform Verification",
-      description: "Automatically verifies internships against trusted platforms like LinkedIn, Internshala, and company websites.",
+      description: "Automatically verifies internships against trusted platforms like Internshala and official company websites.",
       color: "text-green-600"
     },
     {
@@ -58,7 +58,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <img 
-              src="/lovable-uploads/092a01fd-84b9-4028-ad76-e236c1efa376.png" 
+              src="/lovable-uploads/ss-2.jpg" 
               alt="Safe Start Logo" 
               className="mx-auto h-32 w-auto mb-6"
             />

@@ -41,7 +41,7 @@ const Navbar = ({ showNavbar = true }: { showNavbar?: boolean }) => {
             onClick={() => navigate('/')}
           >
             <img 
-              src="/lovable-uploads/092a01fd-84b9-4028-ad76-e236c1efa376.png" 
+              src="/lovable-uploads/ss-2.jpg" 
               alt="Safe Start Logo" 
               className="h-10 w-auto"
             />

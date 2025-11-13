@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/lovable-uploads/092a01fd-84b9-4028-ad76-e236c1efa376.png" 
+                src="/lovable-uploads/ss-2.jpg" 
                 alt="Safe Start Logo" 
                 className="h-8 w-auto"
               />

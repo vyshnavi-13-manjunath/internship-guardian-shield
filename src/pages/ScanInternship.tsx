@@ -20,7 +20,6 @@ const ScanInternship = () => {
     recruiterEmail: "",
     recruiterPhone: "",
     recruiterName: "",
-    linkedinUrl: "",
     offerLetter: null as File | null
   });
   const [aiQuestions, setAiQuestions] = useState([
@@ -48,19 +47,6 @@ const ScanInternship = () => {
     const updatedQuestions = [...aiQuestions];
     updatedQuestions[index].answer = answer;
     setAiQuestions(updatedQuestions);
-  };
-
-  const performLinkedInVerification = async () => {
-    toast.info("Verifying LinkedIn profile...");
-    
-    setTimeout(() => {
-      const verified = Math.random() > 0.3;
-      if (verified) {
-        toast.success("LinkedIn profile verified successfully");
-      } else {
-        toast.error("LinkedIn profile could not be verified");
-      }
-    }, 2000);
   };
 
   const performScamAnalysis = () => {
@@ -107,7 +93,6 @@ const ScanInternship = () => {
       riskColor,
       redFlags,
       greenFlags,
-      linkedinVerified: Math.random() > 0.4,
       companyVerified: Math.random() > 0.3,
       communityReports: Math.floor(Math.random() * 5),
       similarScams: Math.floor(Math.random() * 3)
@@ -157,7 +142,6 @@ const ScanInternship = () => {
       recruiterEmail: "",
       recruiterPhone: "",
       recruiterName: "",
-      linkedinUrl: "",
       offerLetter: null
     });
     setScanResults(null);
@@ -295,26 +279,7 @@ const ScanInternship = () => {
                     onChange={(e) => handleInputChange('recruiterPhone', e.target.value)}
                   />
                 </div>
-                <div>
-                  <Label htmlFor="linkedin-url">LinkedIn Profile URL</Label>
-                  <Input
-                    id="linkedin-url"
-                    placeholder="https://linkedin.com/in/username"
-                    value={formData.linkedinUrl}
-                    onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
-                  />
-                </div>
               </div>
-
-              {formData.linkedinUrl && (
-                <Button 
-                  variant="outline" 
-                  onClick={performLinkedInVerification}
-                  className="w-full"
-                >
-                  Verify LinkedIn Profile
-                </Button>
-              )}
 
               <Button onClick={handleNext} className="w-full bg-blue-600 hover:bg-blue-700">
                 Continue to AI Questions
@@ -395,13 +360,7 @@ const ScanInternship = () => {
               </div>
 
               {/* Verification Status */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 border rounded-lg">
-                  <div className={`text-lg font-semibold ${scanResults.linkedinVerified ? 'text-green-600' : 'text-red-600'}`}>
-                    {scanResults.linkedinVerified ? '✅ Verified' : '❌ Not Verified'}
-                  </div>
-                  <div className="text-sm text-gray-600">LinkedIn Profile</div>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="text-center p-4 border rounded-lg">
                   <div className={`text-lg font-semibold ${scanResults.companyVerified ? 'text-green-600' : 'text-red-600'}`}>
                     {scanResults.companyVerified ? '✅ Verified' : '❌ Not Found'}

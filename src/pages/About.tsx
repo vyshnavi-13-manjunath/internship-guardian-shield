@@ -18,7 +18,7 @@ const About = () => {
     {
       icon: Shield,
       title: "Cross-Platform Verification",
-      description: "We automatically verify internships against trusted platforms like LinkedIn, Internshala, and official company websites."
+      description: "We automatically verify internships against trusted platforms like Internshala and official company websites."
     },
     {
       icon: Eye,
@@ -44,21 +44,21 @@ const About = () => {
 
   const team = [
     {
-      name: "Dr. Sarah Chen",
-      role: "AI Research Director",
-      bio: "PhD in Machine Learning with 10+ years in fraud detection systems.",
+      name: "Vyshnavi Manjunath S",
+      role: "Developer",
+      bio: "Passionate about creating secure systems to protect job seekers from fraud.",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b047?w=150&h=150&fit=crop&crop=face"
     },
     {
-      name: "Mike Rodriguez",
-      role: "Security Expert",
-      bio: "Former cybersecurity analyst with expertise in scam pattern recognition.",
+      name: "Vinayakumar P Zingade",
+      role: "Developer",
+      bio: "Focused on building intelligent solutions for scam detection and prevention.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
     },
     {
-      name: "Priya Sharma",
-      role: "Community Manager",
-      bio: "Dedicated to building safe spaces and empowering users to protect each other.",
+      name: "Siri MN",
+      role: "Developer",
+      bio: "Committed to leveraging technology to create safer online experiences.",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
     }
   ];
@@ -95,7 +95,7 @@ const About = () => {
         <section className="text-center mb-16">
           <div className="max-w-4xl mx-auto">
             <img 
-              src="/lovable-uploads/092a01fd-84b9-4028-ad76-e236c1efa376.png" 
+              src="/lovable-uploads/ss-2.jpg" 
               alt="Safe Start Logo" 
               className="mx-auto h-24 w-auto mb-6"
             />

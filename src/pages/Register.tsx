@@ -19,7 +19,6 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    linkedinUrl: '',
     // Company-specific fields
     companyName: '',
     companyEmail: '',
@@ -83,25 +82,6 @@ const Register = () => {
   const handleAccountTypeSelect = (type: string) => {
     setAccountType(type);
     setStep(2);
-  };
-
-  const handleLinkedInVerification = () => {
-    if (!formData.linkedinUrl.trim()) {
-      toast.error("Please enter your LinkedIn URL first");
-      return;
-    }
-    
-    toast.info("Verifying LinkedIn profile...");
-    
-    // Simulate LinkedIn verification
-    setTimeout(() => {
-      const verified = Math.random() > 0.2; // 80% success rate
-      if (verified) {
-        toast.success("LinkedIn profile verified successfully!");
-      } else {
-        toast.error("Could not verify LinkedIn profile. Please check the URL.");
-      }
-    }, 2000);
   };
 
   const handleSubmit = () => {
@@ -275,29 +255,6 @@ const Register = () => {
                       />
                     </div>
                   </div>
-                </div>
-
-                {/* LinkedIn Verification */}
-                <div>
-                  <h3 className="font-semibold mb-4">LinkedIn Verification (Optional)</h3>
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="https://linkedin.com/in/your-profile"
-                      value={formData.linkedinUrl}
-                      onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
-                      className="flex-1"
-                    />
-                    <Button 
-                      variant="outline" 
-                      onClick={handleLinkedInVerification}
-                      disabled={!formData.linkedinUrl.trim()}
-                    >
-                      Verify
-                    </Button>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Verify your LinkedIn to increase trust score and unlock additional features
-                  </p>
                 </div>
 
                 {/* Company-specific fields */}
